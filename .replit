@@ -18,3 +18,8 @@ expertMode = true
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[userenv]
+
+[userenv.shared]
+GIT_API_KEY = "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"
