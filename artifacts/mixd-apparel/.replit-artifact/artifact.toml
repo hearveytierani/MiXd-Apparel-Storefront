@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "MiXd Apparel Storefront"
+description = "A bold small-batch streetwear storefront for MiXd Apparel, with product browsing, product details, a persistent shopping bag, and customer contact flows."
+version = "1.0.0"
+id = "artifacts/mixd-apparel"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25357
+
+[services.development]
+run = "pnpm --filter @workspace/mixd-apparel run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mixd-apparel", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mixd-apparel/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25357"
+BASE_PATH = "/"

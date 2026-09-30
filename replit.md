@@ -1,6 +1,6 @@
-# [Project name]
+# MiXd Apparel Storefront
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A hand-drawn small-batch streetwear storefront with catalog browsing, product details, a persistent bag, and customer contact flows.
 
 ## Run & Operate
 
@@ -22,23 +22,34 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/mixd-apparel/src/App.tsx` — storefront routes, product catalog, garment illustrations, bag state, and forms
+- `artifacts/mixd-apparel/src/index.css` — suede/gold-leaf visual system and responsive layout
+- `artifacts/mixd-apparel/public/logo.jpg` — MiXd brand mark used in the shell and story pages
+- `artifacts/mixd-apparel/.replit-artifact/artifact.toml` — web artifact routing and managed workflow configuration
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The storefront is frontend-only for now; catalog data is intentionally local so the visual site can be previewed without a service dependency.
+- Bag and newsletter state use localStorage, matching the original static storefront behavior.
+- Garment art remains inline SVG so colors, views, and product variants stay lightweight and editable.
+- Wouter handles the storefront routes so the app preserves the original multi-page information architecture inside one Vite artifact.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Home page introduces the label and featured pieces.
+- Shop page supports category, color, and sort filters.
+- Product pages support color, size, quantity, front/back/detail views, and related pieces.
+- Bag drawer persists items, supports quantity changes and shipping progress, and provides a checkout handoff point.
+- About and Contact pages explain the label and provide validated customer support/newsletter forms.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+None recorded.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Checkout, email delivery, and newsletter delivery are intentionally not connected to an external provider yet; the UI surfaces those boundaries rather than pretending a transaction or message was sent.
+- Keep `BASE_PATH` and `PORT` workflow-provided when running the Vite artifact.
 
 ## Pointers
 
