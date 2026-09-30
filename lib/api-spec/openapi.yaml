@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: storefront
+    description: MiXd storefront form submissions
 paths:
   /healthz:
     get:
@@ -24,6 +26,66 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [storefront]
+      summary: Submit a customer contact message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactMessageInput"
+      responses:
+        "200":
+          description: Message accepted by the configured contact provider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmissionStatus"
+        "400":
+          description: Invalid form input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          description: Contact provider unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /newsletter:
+    post:
+      operationId: subscribeNewsletter
+      tags: [storefront]
+      summary: Add an email to the newsletter list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewsletterSignupInput"
+      responses:
+        "201":
+          description: Email stored in the newsletter table
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmissionStatus"
+        "400":
+          description: Invalid form input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          description: Supabase unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +95,51 @@ components:
           type: string
       required:
         - status
+    ContactMessageInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        topic:
+          type: string
+          minLength: 1
+        order:
+          type: string
+        message:
+          type: string
+          minLength: 1
+      required:
+        - name
+        - email
+        - topic
+        - message
+    NewsletterSignupInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+        - email
+    SubmissionStatus:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+      required:
+        - status
+        - message
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
 

@@ -23,3 +23,6 @@ timeoutMs = 20000
 
 [userenv.shared]
 GIT_API_KEY = "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"
+FORMSPREE_ENDPOINT = "https://formspree.io/f/mzezwyog"
+SUPABASE_NEWSLETTER_TABLE = "newsletter_subscribers"
+SUPABASE_URL = "https://uzprovpzxedumhvnskrw.supabase.co"
