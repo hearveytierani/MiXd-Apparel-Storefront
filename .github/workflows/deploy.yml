@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
       - run: pnpm --filter ./artifacts/mixd-apparel run build
         env:
           BASE_PATH: /MiXd-Apparel-Storefront/
